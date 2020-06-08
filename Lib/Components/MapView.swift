@@ -8,11 +8,13 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
 
 
 struct MapView: UIViewRepresentable {
     
     @Binding var checkpoints: [Checkpoint]
+    @Binding var currentLocation: CLLocationCoordinate2D?
     
     @State private var mapView: MKMapView = MKMapView(frame: UIScreen.main.bounds)
   
@@ -24,17 +26,15 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        if checkpoints.count != uiView.annotations.count {
-            uiView.removeAnnotations(uiView.annotations)
-            uiView.addAnnotations(checkpoints)
-            if let checkPoint = checkpoints.first {
-                centerViewOnUserLocation(uiView, location: checkPoint.coordinate)
-            }
+        uiView.removeAnnotations(uiView.annotations)
+        uiView.addAnnotations(checkpoints)
+        if let checkPoint = checkpoints.last {
+            centerViewOnUserLocation(uiView, location: checkPoint.coordinate)
         }
     }
     
     func centerViewOnUserLocation(_ uiView: MKMapView, location: CLLocationCoordinate2D) {
-        let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 10000.0, longitudinalMeters: 10000.0)
+        let region = MKCoordinateRegion.init(center: location, span: uiView.region.span)
         uiView.setRegion(region, animated: true)
     }
     
@@ -58,10 +58,7 @@ struct MapView: UIViewRepresentable {
         @objc func handleTap(sender: UITapGestureRecognizer) {
             let locationInView = sender.location(in: parent.mapView)
             let locationOnMap = parent.mapView.convert(locationInView, toCoordinateFrom: parent.mapView)
-            let newCheckPoint = Checkpoint(title: "New checkpoint", coordinate: .init(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude))
-            DispatchQueue.main.async {
-                self.parent.checkpoints += [newCheckPoint]
-            }
+            self.parent.currentLocation = locationOnMap
         }
 
 

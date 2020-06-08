@@ -13,7 +13,7 @@ struct MapSceneView: View {
     @ObservedObject var intent = MapSceneIntent()
     
     var body: some View {
-        MapView(checkpoints: $intent.checkpoints)
+        MapView(checkpoints: $intent.checkpoints, currentLocation: $intent.currentLocation)
     }
 }
 
