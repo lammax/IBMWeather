@@ -21,48 +21,76 @@ struct Constants {
         case us = "en-US"
     }
     
-    enum FormFactor: String {
-        case currentWeather
-        case forecast
+    enum ForecastCurrent: String {
+        case nowcast
+        case fifteenminute
     }
     
-    enum IconType: String {
+    enum ForecastDaily: String {
+        case daily3day = "3day"
+        case daily5day = "5day"
+        case daily7day = "7day"
+        case daily10day = "10day"
+        case daily15day = "15day"
+    }
+    
+    /*enum IconType: String {
         case png
         case jpg
         case bmp
         case gif
         case tiff
-    }
+    }*/
+    
+    //MARK: Current example
+    //15 minutes
+    //https://api.weather.com/v1/geocode/34.063/-84.217/forecast/fifteenminute.json?language=ru-RU&units=m&apiKey=2d6b51b925ac4b60ab51b925ac0b605e
+    //current weather
+    //https://api.weather.com/v1/geocode/56.8619/35.8931/forecast/nowcast.json?language=en-US&units=m&apiKey=2d6b51b925ac4b60ab51b925ac0b605e
 
+    //MARK: Daily example
+    //15 Daily forecast
+    //https://api.weather.com/v3/wx/forecast/daily/15day?geocode=33.74,-84.39&format=json&units=m&language=ru-RU&apiKey=2d6b51b925ac4b60ab51b925ac0b605e
+    
+    //MARK: LocationPoint
+    //https://api.weather.com/v3/location/point?geocode=56.8619,35.8931&language=ru-RU&format=json&apiKey=2d6b51b925ac4b60ab51b925ac0b605e
+    
     struct URLs {
-        //current weather
-        //https://api.weather.com/v1/geocode/56.8619/35.8931/forecast/nowcast.json?language=en-US&units=m&apiKey=2d6b51b925ac4b60ab51b925ac0b605e
+        
         private let weatherAPI: String = "2d6b51b925ac4b60ab51b925ac0b605e"
-        private let baseURL: String = "https://api.weather.com/v1/"
+        private let baseCurrentURL: String = "https://api.weather.com/v1/"
+        private let baseDailyURL: String = "https://api.weather.com/v3/wx/forecast/daily/"
+        private let baseLocationURL: String = "https://api.weather.com/v3/location/point?"
 
         var weather: String = ""
-        //var icon: String = ""
         
-        init(location: CLLocationCoordinate2D, unit: Units = .metric, lang: Lang = .us) {
-            weather += baseURL
+        init(forecastCurrent: ForecastCurrent, location: CLLocationCoordinate2D, unit: Units = .metric, lang: Lang = .ru) {
+            weather = baseCurrentURL
             weather += "geocode/\(location.latitude)/\(location.longitude)/"
-            weather += "forecast/nowcast.json?"
+            weather += "forecast/\(forecastCurrent.rawValue).json?"
             weather += "language=\(lang.rawValue)"
             weather += "&units=\(unit.rawValue)"
             weather += "&apiKey=\(weatherAPI)"
-            //print(weather)
         }
         
-        /*private let baseIconURL: String = "http://openweathermap.org/img/wn/"
+        init(forecastDaily: ForecastDaily, location: CLLocationCoordinate2D, unit: Units = .metric, lang: Lang = .ru) {
+            weather = baseDailyURL
+            weather += "\(forecastDaily.rawValue)?"
+            weather += "geocode=\(location.latitude),\(location.longitude)&"
+            weather += "format=json&"
+            weather += "units=\(unit.rawValue)&"
+            weather += "language=\(lang.rawValue)&"
+            weather += "apiKey=\(weatherAPI)"
+        }
 
-        init(iconID: String, type: IconType = .png) {
-            icon += baseIconURL
-            icon += iconID
-            icon += "@2x."
-            icon += type.rawValue
-            //print(icon)
-        }*/
-        
+        init(locationPoint: CLLocationCoordinate2D, unit: Units = .metric, lang: Lang = .ru) {
+            weather = baseLocationURL
+            weather += "geocode=\(locationPoint.latitude),\(locationPoint.longitude)&"
+            weather += "language=\(lang.rawValue)&"
+            weather += "format=json&"
+            weather += "apiKey=\(weatherAPI)"
+        }
+
     }
     
 }

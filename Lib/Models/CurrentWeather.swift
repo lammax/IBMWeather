@@ -40,9 +40,9 @@ import Foundation
 
 struct CurrentWeather: Decodable {
     let metadata: Metadata?
-    let forecast: Forecast?
+    let forecast: CurrentWeatherForecast?
     
-    init(metadata: Metadata? = nil, forecast: Forecast? = nil) {
+    init(metadata: Metadata? = nil, forecast: CurrentWeatherForecast? = nil) {
         self.metadata = metadata
         self.forecast = forecast
     }
@@ -52,21 +52,10 @@ struct CurrentWeather: Decodable {
     }
 }
 
-struct Metadata: Decodable {
-    let language: Constants.Lang?
-    let transaction_id: String?
-    let version: String?
-    let latitude: Double?
-    let longitude: Double?
-    let units: Constants.Units?
-    let expire_time_gmt: UInt?
-    let status_code: Int?
-}
-
-struct Forecast: Decodable {
+struct CurrentWeatherForecast: Decodable {
     let classs: String?
     let expire_time_gmt: UInt?
-    let fcst_valid: UInt
+    let fcst_valid: UInt?
     let fcst_valid_local: String?
     let icon_code: Int?
     let qpf: Float?

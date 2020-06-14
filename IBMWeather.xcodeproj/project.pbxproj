@@ -11,6 +11,12 @@
 		042DD2D0248EDF0F001B4287 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD2CF248EDF0F001B4287 /* Constants.swift */; };
 		042DD2D3248EE1A6001B4287 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD2D2248EE1A6001B4287 /* Webservice.swift */; };
 		042DD2D6248EE1E2001B4287 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD2D5248EE1E2001B4287 /* CurrentWeather.swift */; };
+		042DD3D7249516C6001B4287 /* UIImage+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD3D6249516C6001B4287 /* UIImage+adds.swift */; };
+		042DD3D924952469001B4287 /* Weather15Minutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD3D824952469001B4287 /* Weather15Minutes.swift */; };
+		042DD3DB249524F4001B4287 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD3DA249524F4001B4287 /* Common.swift */; };
+		042DD3DF2496495F001B4287 /* WeatherDaily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD3DE2496495F001B4287 /* WeatherDaily.swift */; };
+		042DD3E124965E90001B4287 /* CLLocationCoordinate2D+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD3E024965E90001B4287 /* CLLocationCoordinate2D+adds.swift */; };
+		042DD3E324966005001B4287 /* LocationPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DD3E224966005001B4287 /* LocationPoint.swift */; };
 		045FA486248D354100A772BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA485248D354100A772BA /* AppDelegate.swift */; };
 		045FA488248D354100A772BA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA487248D354100A772BA /* SceneDelegate.swift */; };
 		045FA48C248D354400A772BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045FA48B248D354400A772BA /* Assets.xcassets */; };
@@ -21,7 +27,7 @@
 		045FA4A2248D363A00A772BA /* MapSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA4A1248D363A00A772BA /* MapSceneModel.swift */; };
 		045FA4A8248D36ED00A772BA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA4A7248D36ED00A772BA /* MapView.swift */; };
 		045FA4AB248D377F00A772BA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA4AA248D377F00A772BA /* LocationManager.swift */; };
-		045FA4AD248D385C00A772BA /* Checkpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA4AC248D385C00A772BA /* Checkpoint.swift */; };
+		045FA4AD248D385C00A772BA /* WeatherpointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA4AC248D385C00A772BA /* WeatherpointAnnotation.swift */; };
 		045FA4AF248D38F100A772BA /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA4AE248D38F100A772BA /* AppState.swift */; };
 		045FA4B1248D390E00A772BA /* AppSetings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA4B0248D390E00A772BA /* AppSetings.swift */; };
 		045FA4B3248D391D00A772BA /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FA4B2248D391D00A772BA /* AppIntent.swift */; };
@@ -32,6 +38,12 @@
 		042DD2CF248EDF0F001B4287 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		042DD2D2248EE1A6001B4287 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		042DD2D5248EE1E2001B4287 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
+		042DD3D6249516C6001B4287 /* UIImage+adds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+adds.swift"; sourceTree = "<group>"; };
+		042DD3D824952469001B4287 /* Weather15Minutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather15Minutes.swift; sourceTree = "<group>"; };
+		042DD3DA249524F4001B4287 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		042DD3DE2496495F001B4287 /* WeatherDaily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDaily.swift; sourceTree = "<group>"; };
+		042DD3E024965E90001B4287 /* CLLocationCoordinate2D+adds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+adds.swift"; sourceTree = "<group>"; };
+		042DD3E224966005001B4287 /* LocationPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPoint.swift; sourceTree = "<group>"; };
 		045FA482248D354100A772BA /* IBMWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IBMWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045FA485248D354100A772BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		045FA487248D354100A772BA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +56,7 @@
 		045FA4A1248D363A00A772BA /* MapSceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSceneModel.swift; sourceTree = "<group>"; };
 		045FA4A7248D36ED00A772BA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		045FA4AA248D377F00A772BA /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		045FA4AC248D385C00A772BA /* Checkpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkpoint.swift; sourceTree = "<group>"; };
+		045FA4AC248D385C00A772BA /* WeatherpointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherpointAnnotation.swift; sourceTree = "<group>"; };
 		045FA4AE248D38F100A772BA /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		045FA4B0248D390E00A772BA /* AppSetings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetings.swift; sourceTree = "<group>"; };
 		045FA4B2248D391D00A772BA /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
@@ -81,6 +93,10 @@
 			isa = PBXGroup;
 			children = (
 				042DD2D5248EE1E2001B4287 /* CurrentWeather.swift */,
+				042DD3D824952469001B4287 /* Weather15Minutes.swift */,
+				042DD3DA249524F4001B4287 /* Common.swift */,
+				042DD3DE2496495F001B4287 /* WeatherDaily.swift */,
+				042DD3E224966005001B4287 /* LocationPoint.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,7 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				045FA4A7248D36ED00A772BA /* MapView.swift */,
-				045FA4AC248D385C00A772BA /* Checkpoint.swift */,
+				045FA4AC248D385C00A772BA /* WeatherpointAnnotation.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -187,6 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				042DD2CC248EDA89001B4287 /* Date+adds.swift */,
+				042DD3D6249516C6001B4287 /* UIImage+adds.swift */,
+				042DD3E024965E90001B4287 /* CLLocationCoordinate2D+adds.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -273,11 +291,17 @@
 				045FA49F248D362700A772BA /* MapSceneIntent.swift in Sources */,
 				042DD2D6248EE1E2001B4287 /* CurrentWeather.swift in Sources */,
 				045FA4A8248D36ED00A772BA /* MapView.swift in Sources */,
+				042DD3DF2496495F001B4287 /* WeatherDaily.swift in Sources */,
 				045FA49D248D361A00A772BA /* MapSceneView.swift in Sources */,
+				042DD3DB249524F4001B4287 /* Common.swift in Sources */,
 				045FA4B1248D390E00A772BA /* AppSetings.swift in Sources */,
+				042DD3D7249516C6001B4287 /* UIImage+adds.swift in Sources */,
 				045FA4B3248D391D00A772BA /* AppIntent.swift in Sources */,
 				045FA4AF248D38F100A772BA /* AppState.swift in Sources */,
-				045FA4AD248D385C00A772BA /* Checkpoint.swift in Sources */,
+				042DD3E324966005001B4287 /* LocationPoint.swift in Sources */,
+				042DD3D924952469001B4287 /* Weather15Minutes.swift in Sources */,
+				042DD3E124965E90001B4287 /* CLLocationCoordinate2D+adds.swift in Sources */,
+				045FA4AD248D385C00A772BA /* WeatherpointAnnotation.swift in Sources */,
 				042DD2D0248EDF0F001B4287 /* Constants.swift in Sources */,
 				042DD2D3248EE1A6001B4287 /* Webservice.swift in Sources */,
 				045FA4AB248D377F00A772BA /* LocationManager.swift in Sources */,
@@ -421,6 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"IBMWeather/Preview Content\"";
 				DEVELOPMENT_TEAM = Z8JVJD6M2F;
 				ENABLE_PREVIEWS = YES;
@@ -441,6 +466,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"IBMWeather/Preview Content\"";
 				DEVELOPMENT_TEAM = Z8JVJD6M2F;
 				ENABLE_PREVIEWS = YES;

@@ -7,16 +7,18 @@
 //
 
 import CoreLocation
-import  MapKit
+import MapKit
 
-final class Checkpoint: NSObject, MKAnnotation {
+final class WeatherpointAnnotation: NSObject, MKAnnotation {
     let title: String?
     let subtitle: String?
     let coordinate: CLLocationCoordinate2D
+    let image: UIImage!
 
-    init(title: String?, subtitle: String? = nil, coordinate: CLLocationCoordinate2D) {
+    init(title: String?, subtitle: String? = nil, coordinate: CLLocationCoordinate2D, imageID: String) {
         self.title = title
         self.subtitle = subtitle
         self.coordinate = coordinate
+        self.image = UIImage(named: imageID)
     }
 }
