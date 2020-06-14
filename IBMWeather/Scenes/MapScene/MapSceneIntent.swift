@@ -44,10 +44,11 @@ class MapSceneIntent: ObservableObject {
                 self.addFirstFour(forcasts: forcasts)
                 self.addHours(forcasts: forcasts)
                 
-                let title = "\(forecastFirst.temp ?? 0) C"
+                let title = (self.settings?.city ?? "") + " " + "\(forecastFirst.temp ?? 0) C"
+                let mainText = "\(forecastFirst.temp ?? 0) C"
                 let subtitle = forecastFirst.phrase_32char ?? ""
                 let imageID = "\(forecastFirst.icon_code ?? 44)"
-                let newCheckPoint = WeatherpointAnnotation(title: title, subtitle: subtitle, coordinate: $0.1, imageID: imageID)
+                let newCheckPoint = WeatherpointAnnotation(title: title, subtitle: subtitle, coordinate: $0.1, imageID: imageID, mainText: mainText)
                 self.checkpoints += [newCheckPoint]
             }
         }
@@ -77,7 +78,6 @@ class MapSceneIntent: ObservableObject {
                 let location = locationPoint.city ?? locationPoint.country ?? ""
                 self.settings?.city = location
                 if let checkPoint = self.checkpoints.last, checkPoint.city.isEmpty {
-                    checkPoint.title = location + " " + (checkPoint.title ?? "")
                     checkPoint.city = location
                 }
             }

@@ -14,13 +14,28 @@ final class WeatherpointAnnotation: NSObject, MKAnnotation {
     let subtitle: String?
     let coordinate: CLLocationCoordinate2D
     let image: UIImage!
-    var city: String
+    
+    var mainText: String {
+        willSet {
+            if !newValue.isEmpty {
+                self.title = city + " " + newValue
+            }
+        }
+    }
+    var city: String {
+        willSet {
+            if !newValue.isEmpty {
+                self.title = newValue + " " + mainText
+            }
+        }
+    }
 
-    init(title: String?, subtitle: String? = nil, coordinate: CLLocationCoordinate2D, imageID: String, city: String = "") {
+    init(title: String? = nil, subtitle: String? = nil, coordinate: CLLocationCoordinate2D, imageID: String, mainText: String = "", city: String = "") {
         self.title = title
         self.subtitle = subtitle
         self.coordinate = coordinate
         self.image = UIImage(named: imageID)
+        self.mainText = mainText
         self.city = city
     }
 }
