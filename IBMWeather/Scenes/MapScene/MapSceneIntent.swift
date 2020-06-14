@@ -17,12 +17,16 @@ class MapSceneIntent: ObservableObject {
     @Published var currentLocation: CLLocationCoordinate2D?
 
     private let webservice = Webservice.sharedInstance
-    
     private var cancellables: [AnyCancellable] = []
+    private var settings: CommonSettings?
     
     init() {
         LocationManager.sharedInstance.delegate = self
         setupPublishers()
+    }
+    
+    func setup(settings: CommonSettings) {
+        self.settings = settings
     }
     
     private func setupPublishers() {
@@ -35,10 +39,14 @@ class MapSceneIntent: ObservableObject {
                 .map { ($0, location) }
         }
         .sink {
-            if let weather = $0.0, let forecast = weather.forecasts?.first {
-                let title = "\(forecast.temp ?? 0) C"
-                let subtitle = forecast.phrase_32char ?? ""
-                let imageID = "\(forecast.icon_code ?? 44)"
+            if let weather = $0.0, let forcasts =  weather.forecasts, let forecastFirst = forcasts.first {
+                
+                self.addFirstFour(forcasts: forcasts)
+                self.addHours(forcasts: forcasts)
+                
+                let title = "\(forecastFirst.temp ?? 0) C"
+                let subtitle = forecastFirst.phrase_32char ?? ""
+                let imageID = "\(forecastFirst.icon_code ?? 44)"
                 let newCheckPoint = WeatherpointAnnotation(title: title, subtitle: subtitle, coordinate: $0.1, imageID: imageID)
                 self.checkpoints += [newCheckPoint]
             }
@@ -52,8 +60,8 @@ class MapSceneIntent: ObservableObject {
                 .map { $0 }
         }
         .sink {
-            if let weather = $0, let dailyPart = weather.daypart?.first {
-                print(dailyPart?.iconCode?.count ?? 0)
+            if let weather = $0, let dayPart = weather.daypart?.first, let dp = dayPart {
+                self.addDays(wDay: weather, dayPart: dp)
             }
         }
 
@@ -66,7 +74,12 @@ class MapSceneIntent: ObservableObject {
         }
         .sink {
             if let locationPoint = $0?.location {
-                print(locationPoint.city ?? "No city")
+                let location = locationPoint.city ?? locationPoint.country ?? ""
+                self.settings?.city = location
+                if let checkPoint = self.checkpoints.last, checkPoint.city.isEmpty {
+                    checkPoint.title = location + " " + (checkPoint.title ?? "")
+                    checkPoint.city = location
+                }
             }
         }
 
@@ -75,6 +88,53 @@ class MapSceneIntent: ObservableObject {
         self.cancellables.append(cancellableLocationPoint)
     }
     
+    private func addFirstFour(forcasts: [Weather15MinutesForecast]?) {
+        settings?.weatherItemsFirst4 = []
+        if let forcasts = forcasts, forcasts.count > 3 {
+            for i in 0...3 {
+                settings?.weatherItemsFirst4.append(item15(forcast: forcasts[i]))
+            }
+        }
+    }
+    
+    private func addHours(forcasts: [Weather15MinutesForecast]?) {
+        settings?.weatherItemsHours = []
+        if let forcasts = forcasts, forcasts.count > 4 {
+            for i in stride(from: 4, to: forcasts.count-1, by: 4) {
+                settings?.weatherItemsFirst4.append(item15(forcast: forcasts[i]))
+            }
+        }
+    }
+
+    private func addDays(wDay: WeatherDaily, dayPart: DayPart) {
+        settings?.weatherItemsDays = []
+        if let days = wDay.dayOfWeek, days.count > 0 {
+            for i in 1...days.count-1 {
+                let dpId = i * 2
+                let date = "D" + (Date.dateFormatterWithTime.date(from: wDay.validTimeLocal?[i] ?? "") ?? Date()).toString(with: .dayMonth)
+                let image = Image(uiImage: UIImage(named: "\(dayPart.iconCode?[dpId] ?? 44)")!.resizedImage(for: CGSize(width: 40, height: 40)))
+                let temp = "t=\(dayPart.temperature?[dpId] ?? 0)C"
+                let wspd = "\(dayPart.windSpeed?[dpId] ?? 0)m/s"
+                let wdir_cardinal = "\(dayPart.windDirectionCardinal?[dpId] ?? "")"
+                let wind = "W=\(wspd),\(wdir_cardinal)"
+                let rh = "H=\(dayPart.relativeHumidity?[dpId] ?? 0)%"
+                let item = WeatherItem(date: date, icon: image, temp: temp, wind: wind, humidity: rh)
+                settings?.weatherItemsDays.append(item)
+            }
+        }
+    }
+    
+    private func item15(forcast: Weather15MinutesForecast) -> WeatherItem {
+        let date = "T" + (Date.dateFormatterWithTime.date(from: forcast.fcst_valid_local ?? "") ?? Date()).toString(with: .timeShort)
+        let image = Image(uiImage: UIImage(named: "\(forcast.icon_code ?? 44)")!.resizedImage(for: CGSize(width: 40, height: 40)))
+        let temp = "t=\(forcast.temp ?? 0)C"
+        let wspd = "\(forcast.wspd ?? 0)m/s"
+        let wdir_cardinal = "\(forcast.wdir_cardinal ?? "")"
+        let wind = "W=\(wspd),\(wdir_cardinal)"
+        let rh = "H=\(forcast.rh ?? 0)%"
+        return WeatherItem(date: date, icon: image, temp: temp, wind: wind, humidity: rh)
+    }
+
 }
 
 extension MapSceneIntent: LocationManagerDelegate {

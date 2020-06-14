@@ -13,6 +13,8 @@ import CoreLocation
 
 struct MapView: UIViewRepresentable {
     
+    @EnvironmentObject var settings: CommonSettings
+    
     @Binding var checkpoints: [WeatherpointAnnotation]
     @Binding var currentLocation: CLLocationCoordinate2D?
     
@@ -99,19 +101,7 @@ struct MapView: UIViewRepresentable {
             
             // This illustrates how to detect which annotation type was tapped on for its callout.
             if let annotation = view.annotation, annotation.isKind(of: WeatherpointAnnotation.self) {
-                print("Tapped WeatherpointAnnotation accessory view")
-                
-                /*if let detailNavController = storyboard?.instantiateViewController(withIdentifier: "DetailNavController") {
-                    detailNavController.modalPresentationStyle = .popover
-                    let presentationController = detailNavController.popoverPresentationController
-                    presentationController?.permittedArrowDirections = .any
-                    
-                    // Anchor the popover to the button that triggered the popover.
-                    presentationController?.sourceRect = control.frame
-                    presentationController?.sourceView = control
-                    
-                    present(detailNavController, animated: true, completion: nil)
-                }*/
+                self.parent.settings.showWeather = true
             }
         }
         

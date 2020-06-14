@@ -10,15 +10,17 @@ import CoreLocation
 import MapKit
 
 final class WeatherpointAnnotation: NSObject, MKAnnotation {
-    let title: String?
+    var title: String?
     let subtitle: String?
     let coordinate: CLLocationCoordinate2D
     let image: UIImage!
+    var city: String
 
-    init(title: String?, subtitle: String? = nil, coordinate: CLLocationCoordinate2D, imageID: String) {
+    init(title: String?, subtitle: String? = nil, coordinate: CLLocationCoordinate2D, imageID: String, city: String = "") {
         self.title = title
         self.subtitle = subtitle
         self.coordinate = coordinate
         self.image = UIImage(named: imageID)
+        self.city = city
     }
 }
