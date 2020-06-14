@@ -27,9 +27,7 @@ struct WeatherSceneView: View {
             
             Text(settings.city)
             
-            List(settings.weatherItemsFirst4 + settings.weatherItemsHours + settings.weatherItemsDays) { item in
-                WeatherRow(item: item)
-            }
+            List(settings.weatherItemsFirst4 + settings.weatherItemsHours + settings.weatherItemsDays, rowContent: WeatherRow.init)
 
         }
     }
