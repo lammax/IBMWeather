@@ -13,6 +13,6 @@ struct WeatherItem: Identifiable {
     var date: String
     var icon: Image
     var temp: String
-    var wind: String //wind cardianl direction
+    var wind: String //wind cardinal direction
     var humidity: String //humidity %
 }

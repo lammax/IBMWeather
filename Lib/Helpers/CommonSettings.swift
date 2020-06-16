@@ -14,4 +14,10 @@ class CommonSettings: ObservableObject {
     @Published var weatherItemsHours: [WeatherItem] = []
     @Published var weatherItemsDays: [WeatherItem] = []
     @Published var showWeather: Bool = false
+    //var whole15dayWeather: AnyPublisher<[WeatherItem], Never>
+    
+    init() {
+        //let whole15dayWeather = Publishers.Merge3(weatherItemsFirst4, weatherItemsHours, weatherItemsDays)
+        //print(whole15dayWeather.self)
+    }
 }

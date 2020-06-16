@@ -50,6 +50,8 @@ class MapSceneIntent: ObservableObject {
                 let imageID = "\(forecastFirst.icon_code ?? 44)"
                 let newCheckPoint = WeatherpointAnnotation(title: title, subtitle: subtitle, coordinate: $0.1, imageID: imageID, mainText: mainText)
                 self.checkpoints += [newCheckPoint]
+                
+                self.settings?.showWeather = true
             }
         }
 
@@ -89,26 +91,33 @@ class MapSceneIntent: ObservableObject {
     }
     
     private func addFirstFour(forcasts: [Weather15MinutesForecast]?) {
-        settings?.weatherItemsFirst4 = []
+        //settings?.weatherItemsFirst4 = []
         if let forcasts = forcasts, forcasts.count > 3 {
+            var items: [WeatherItem] = []
             for i in 0...3 {
-                settings?.weatherItemsFirst4.append(item15(forcast: forcasts[i]))
+                //settings?.weatherItemsFirst4.append(item15(forcast: forcasts[i]))
+                items.append(item15(forcast: forcasts[i]))
             }
+            settings?.weatherItemsFirst4 = items
         }
     }
     
     private func addHours(forcasts: [Weather15MinutesForecast]?) {
-        settings?.weatherItemsHours = []
+        //settings?.weatherItemsHours = []
         if let forcasts = forcasts, forcasts.count > 4 {
+            var items: [WeatherItem] = []
             for i in stride(from: 4, to: forcasts.count-1, by: 4) {
-                settings?.weatherItemsFirst4.append(item15(forcast: forcasts[i]))
+                //settings?.weatherItemsHours.append(item15(forcast: forcasts[i]))
+                items.append(item15(forcast: forcasts[i]))
             }
+            settings?.weatherItemsHours = items
         }
     }
 
     private func addDays(wDay: WeatherDaily, dayPart: DayPart) {
-        settings?.weatherItemsDays = []
+        //settings?.weatherItemsDays = []
         if let days = wDay.dayOfWeek, days.count > 0 {
+            var items: [WeatherItem] = []
             for i in 1...days.count-1 {
                 let dpId = i * 2
                 let date = "D" + (Date.dateFormatterWithTime.date(from: wDay.validTimeLocal?[i] ?? "") ?? Date()).toString(with: .dayMonth)
@@ -119,8 +128,10 @@ class MapSceneIntent: ObservableObject {
                 let wind = "W=\(wspd),\(wdir_cardinal)"
                 let rh = "H=\(dayPart.relativeHumidity?[dpId] ?? 0)%"
                 let item = WeatherItem(date: date, icon: image, temp: temp, wind: wind, humidity: rh)
-                settings?.weatherItemsDays.append(item)
+                //settings?.weatherItemsDays.append(item)
+                items.append(item)
             }
+            settings?.weatherItemsDays = items
         }
     }
     

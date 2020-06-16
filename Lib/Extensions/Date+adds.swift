@@ -81,7 +81,7 @@ extension Date {
 
     static let dateFormatterWithoutTime: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.timeZone = NSTimeZone() as! TimeZone
+        formatter.timeZone = NSTimeZone() as TimeZone
         formatter.locale = NSLocale.current // NSLocale(localeIdentifier: "en_US_POSIX")
         formatter.dateFormat =  DateFormat.iso.rawValue
 

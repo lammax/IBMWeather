@@ -6,7 +6,7 @@
 //  Copyright © 2020 Lammax. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 import SwiftUI
 
@@ -18,6 +18,7 @@ struct WeatherSceneView: View {
     @ObservedObject var intent = WeatherSceneIntent()
     
     var body: some View {
+        //let wholeWeather = Publishers.Merge3(, $settings.weatherItemsHours, $settings.weatherItemsDays)
         VStack {
             
             RoundedRectangle(cornerRadius: 2)
@@ -27,7 +28,7 @@ struct WeatherSceneView: View {
             
             Text(settings.city)
             
-            List(settings.weatherItemsFirst4 + settings.weatherItemsHours + settings.weatherItemsDays, rowContent: WeatherRow.init)
+            List((settings.weatherItemsFirst4 + settings.weatherItemsHours + settings.weatherItemsDays), rowContent: WeatherRow.init)
 
         }
     }
